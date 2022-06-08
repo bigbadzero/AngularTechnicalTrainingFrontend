@@ -8,14 +8,20 @@ import {HomeService} from './home.component.service'
 })
 export class HomeComponent implements OnInit {
   Assets: any =[];
-  constructor(public homeService: HomeService) { }
+  columnsToDisplay = ['tagID', 'assetType.name', 'description', 'employee.name', 'dateAdded']
+  showTable: boolean = false;
+  constructor(public homeService: HomeService) {
+    
+   }
 
   ngOnInit(): void {
+    this.loadAssets();
   }
 
   loadAssets(){
     return this.homeService.getAllAssets().subscribe((data: {})=>{
       this.Assets = data;
+      this.showTable = true;
       console.log(this.Assets);
     });
   }

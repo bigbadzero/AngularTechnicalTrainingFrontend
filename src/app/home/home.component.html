@@ -1,3 +1,29 @@
-<button (click)="loadAssets()">
-    getData
-</button>
+<table *ngIf="showTable" mat-table [dataSource]="Assets">
+    <ng-container matColumnDef="tagID">
+        <th mat-header-cell *matHeaderCellDef>TagID</th>
+        <td mat-cell *matCellDef="let element">{{element.tagID}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="assetType.name">
+        <th mat-header-cell *matHeaderCellDef>Asset</th>
+        <td mat-cell *matCellDef="let element">{{element.assetType.name}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef>Description</th>
+        <td mat-cell *matCellDef="let element">{{element.description}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="employee.name">
+        <th mat-header-cell *matHeaderCellDef>Employee</th>
+        <td mat-cell *matCellDef="let element">{{element.employee.name}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="dateAdded">
+        <th mat-header-cell *matHeaderCellDef>Date Aded</th>
+        <td mat-cell *matCellDef="let element">{{element.dateAdded}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
+</table>
