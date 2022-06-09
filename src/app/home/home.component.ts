@@ -14,8 +14,9 @@ import {Asset} from '../shared/asset';
 export class HomeComponent implements OnInit {
   Assets: Asset[];
   dataSource: any;
+  loading: boolean = true;
 
-  columnsToDisplay = ['tagID', 'assetType.name', 'description', 'employee.name', 'dateAdded']
+  columnsToDisplay = ['tagID', 'assetType.name', 'description', 'employee.name', 'dateAdded'];
   constructor(public homeService: HomeService, private _liveAnnouncer: LiveAnnouncer) {}
    @ViewChild(MatSort) sort: MatSort;
    @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -26,12 +27,16 @@ export class HomeComponent implements OnInit {
 
   loadAssets(){
     return this.homeService.getAllAssets().subscribe(x =>{
+      this.loading = false;
       this.Assets = x;
       this.dataSource = new MatTableDataSource(x);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     }, error =>{
-      alert("there was an error");
-    });
+      alert(error.message);
+      
+    }), () =>{
+      console.log("complete loading assets");
+    };
   }
 }

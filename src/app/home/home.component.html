@@ -1,5 +1,7 @@
-<div class="mat-elevation-z8">
+<app-custom-spinner *ngIf="loading"></app-custom-spinner>
+<div [hidden]="loading" class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource" matSort>
+
     <ng-container matColumnDef="tagID">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>TagID</th>
       <td mat-cell *matCellDef="let element">{{ element.tagID }}</td>

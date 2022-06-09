@@ -14,14 +14,17 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 //angular generated components
 import {HomeComponent} from './home/home.component';
+import { CustomSpinnerComponent } from './custom-spinner/custom-spinner.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    CustomSpinnerComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,8 @@ import {HomeComponent} from './home/home.component';
     MatTableModule,
     MatSortModule,
     HttpClientModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
