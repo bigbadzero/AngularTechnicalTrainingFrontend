@@ -19,9 +19,9 @@ export class HomeService{
         headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
 
-    getAllAssets(): Observable<Asset>{
+    getAllAssets(): Observable<Asset[]>{
         return this.http
-        .get<Asset>(this.apiURL + '/Asset')
+        .get<Asset[]>(this.apiURL + '/Asset')
         .pipe(retry(1), catchError(this.handleError));
     }
 

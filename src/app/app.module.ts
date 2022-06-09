@@ -12,6 +12,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTableModule} from '@angular/material/table';
+import {MatSortModule} from '@angular/material/sort';
 
 //angular generated components
 import {HomeComponent} from './home/home.component';
@@ -32,6 +33,7 @@ import {HomeComponent} from './home/home.component';
     MatListModule,
     MatButtonModule,
     MatTableModule,
+    MatSortModule,
     HttpClientModule
   ],
   providers: [],
