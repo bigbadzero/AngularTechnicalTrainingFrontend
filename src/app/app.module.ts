@@ -19,12 +19,16 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 //angular generated components
 import {HomeComponent} from './home/home.component';
 import { CustomSpinnerComponent } from './custom-spinner/custom-spinner.component';
+import { EmployeeComponent } from './employee/employee.component';
+import { EmployeeDetailComponent } from './employee-detail/employee-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    CustomSpinnerComponent
+    CustomSpinnerComponent,
+    EmployeeComponent,
+    EmployeeDetailComponent
   ],
   imports: [
     BrowserModule,

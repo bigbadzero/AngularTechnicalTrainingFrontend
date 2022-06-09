@@ -1,7 +1,6 @@
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import {HomeService} from './home.component.service'
-import {LiveAnnouncer} from '@angular/cdk/a11y';
-import {MatSort, Sort} from '@angular/material/sort';
+import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {Asset} from '../shared/asset';
@@ -17,7 +16,7 @@ export class HomeComponent implements OnInit {
   loading: boolean = true;
 
   columnsToDisplay = ['tagID', 'assetType.name', 'description', 'employee.name', 'dateAdded'];
-  constructor(public homeService: HomeService, private _liveAnnouncer: LiveAnnouncer) {}
+  constructor(public homeService: HomeService) {}
    @ViewChild(MatSort) sort: MatSort;
    @ViewChild(MatPaginator) paginator: MatPaginator;
 
