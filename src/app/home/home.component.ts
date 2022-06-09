@@ -15,7 +15,6 @@ export class HomeComponent implements OnInit {
   Assets: Asset[];
   dataSource: any;
   columnsToDisplay = ['tagID', 'assetType.name', 'description', 'employee.name', 'dateAdded']
-  showTable: boolean = false;
   constructor(public homeService: HomeService, private _liveAnnouncer: LiveAnnouncer) {
     
    }
@@ -30,7 +29,6 @@ export class HomeComponent implements OnInit {
   loadAssets(){
     return this.homeService.getAllAssets().subscribe(x =>{
       this.Assets = x;
-      this.showTable = true;
       this.dataSource = new MatTableDataSource(x);
       this.dataSource.sort = this.sort;
     }, error =>{
