@@ -1,30 +1,36 @@
-<table mat-table [dataSource]="dataSource" matSort>
-
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="tagID">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>TagID</th>
-        <td mat-cell *matCellDef="let element">{{element.tagID}}</td>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>TagID</th>
+      <td mat-cell *matCellDef="let element">{{ element.tagID }}</td>
     </ng-container>
 
     <ng-container matColumnDef="assetType.name">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Asset</th>
-        <td mat-cell *matCellDef="let element">{{element.assetType.name}}</td>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Asset</th>
+      <td mat-cell *matCellDef="let element">{{ element.assetType.name }}</td>
     </ng-container>
 
     <ng-container matColumnDef="description">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
-        <td mat-cell *matCellDef="let element">{{element.description}}</td>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
+      <td mat-cell *matCellDef="let element">{{ element.description }}</td>
     </ng-container>
 
     <ng-container matColumnDef="employee.name">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Employee</th>
-        <td mat-cell *matCellDef="let element">{{element.employee.name}}</td>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Employee</th>
+      <td mat-cell *matCellDef="let element">{{ element.employee.name }}</td>
     </ng-container>
 
     <ng-container matColumnDef="dateAdded">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Date Aded</th>
-        <td mat-cell *matCellDef="let element">{{element.dateAdded}}</td>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Date Aded</th>
+      <td mat-cell *matCellDef="let element">{{ element.dateAdded }}</td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
     <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
-</table>
+  </table>
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons
+  >
+  </mat-paginator>
+</div>
