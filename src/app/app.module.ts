@@ -15,13 +15,19 @@ import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatDialogModule} from '@angular/material/dialog'
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
 
 //angular generated components
 import {HomeComponent} from './home/home.component';
-import { CustomSpinnerComponent } from './custom-spinner/custom-spinner.component';
+import { CustomSpinnerComponent } from './components/custom-spinner/custom-spinner.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { EmployeeDetailComponent } from './employee-detail/employee-detail.component';
 import { EmployeeAssetsComponent } from './employee-assets/employee-assets.component';
+import { DialogComponent } from './components/dialog/dialog.component';
+
 
 @NgModule({
   declarations: [
@@ -30,7 +36,8 @@ import { EmployeeAssetsComponent } from './employee-assets/employee-assets.compo
     CustomSpinnerComponent,
     EmployeeComponent,
     EmployeeDetailComponent,
-    EmployeeAssetsComponent
+    EmployeeAssetsComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +53,11 @@ import { EmployeeAssetsComponent } from './employee-assets/employee-assets.compo
     MatSortModule,
     HttpClientModule,
     MatPaginatorModule,
-    MatProgressSpinnerModule
+    MatTooltipModule,
+    MatProgressSpinnerModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]
