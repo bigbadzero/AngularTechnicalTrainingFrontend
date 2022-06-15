@@ -15,12 +15,14 @@ export class EmployeeAssetsComponent implements OnInit {
   sub;
   dataSource: any;
   loading: boolean = true;
+  employeeName: string;
   columnsToDisplay = [
     'tagID',
     'assetType.name',
     'description',
     'employee.name',
     'dateAdded',
+    'action'
   ];
 
   constructor(
@@ -51,6 +53,7 @@ export class EmployeeAssetsComponent implements OnInit {
           this.dataSource = new MatTableDataSource(result);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
+          this.employeeName = result[0].employee.name;
         },
         (error) => {
           alert(error.message);
