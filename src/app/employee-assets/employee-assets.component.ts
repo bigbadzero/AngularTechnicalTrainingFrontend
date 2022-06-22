@@ -1,16 +1,27 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { EmployeeAssetsService } from './employee-assets.component.service';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { Asset } from '../shared/asset';
+import { AssetType } from '../shared/assetType';
+import {Employee} from '../shared/employee';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
+import { AssetDialogData } from '../shared/assetDialogData';
+
 @Component({
   selector: 'app-employee-assets',
   templateUrl: './employee-assets.component.html',
   styleUrls: ['./employee-assets.component.scss'],
 })
 export class EmployeeAssetsComponent implements OnInit {
+  assetTypes: AssetType[];
+  employees: Employee[];
   id: number;
   sub;
   dataSource: any;
@@ -22,12 +33,13 @@ export class EmployeeAssetsComponent implements OnInit {
     'description',
     'employee.name',
     'dateAdded',
-    'action'
+    'action',
   ];
 
   constructor(
     private _Activatedroute: ActivatedRoute,
-    public employeeAssetsService: EmployeeAssetsService
+    public employeeAssetsService: EmployeeAssetsService,
+    public dialog: MatDialog
   ) {}
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -38,6 +50,22 @@ export class EmployeeAssetsComponent implements OnInit {
     });
 
     this.loadAssetsByEmployee(this.id);
+
+    this.employeeAssetsService.getAllAssetTypes().subscribe((result) => {
+      this.assetTypes = result;
+    }, err => {
+      console.log(err)
+    }, () => {
+      console.log('complete loading assetTypes');
+    });
+
+    this.employeeAssetsService.getAllEmployees().subscribe((result) => {
+      this.employees = result;
+    }, err=>{
+      console.log(err)
+    }, () =>{
+      console.log('complete loading employees');
+    })
   }
 
   ngOnDestroy(): void {
@@ -62,5 +90,56 @@ export class EmployeeAssetsComponent implements OnInit {
       () => {
         console.log('complete loading assets');
       };
+  }
+
+  edit(row): void {
+    let dataAsset = this.dataSource._data._value[row];
+    console.log(dataAsset);
+    const asset: Asset = {
+      tagId: dataAsset.tagID,
+      assetId: dataAsset.assetId,
+      assetType: dataAsset.assetType,
+      description: dataAsset.description,
+      employeeId: dataAsset.employeeId,
+      employee: dataAsset.employee,
+      dateAdded: dataAsset.dateAdded,
+      retired: dataAsset.retired,
+      dateRetired: dataAsset.dateRetired,
+    };
+
+    
+    const dialogRef = this.dialog.open(EmployeeAssetsDialog, {
+      width: '250px',
+      data: {asset:asset, assetTypes: this.assetTypes, employees: this.employees},
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed')
+    });
+  }
+}
+
+@Component({
+  selector: 'employee-assets-dialog',
+  templateUrl: 'employee-assets-dialog.html',
+})
+export class EmployeeAssetsDialog {
+  /**
+   *
+   */
+  constructor(
+    public dialogRef: MatDialogRef<EmployeeAssetsComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: AssetDialogData
+
+  ) {
+    console.log(this.data);
+  }
+
+  onInit() {
+    console.log(this.data);
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }

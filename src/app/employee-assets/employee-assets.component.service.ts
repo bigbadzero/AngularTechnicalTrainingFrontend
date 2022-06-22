@@ -1,6 +1,8 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core'
 import {Asset} from '../shared/asset';
+import {AssetType} from '../shared/assetType';
+import {Employee} from '../shared/employee'
 import {Observable, throwError} from 'rxjs';
 import {retry, catchError} from 'rxjs/operators';
 
@@ -23,6 +25,18 @@ export class EmployeeAssetsService{
         return this.http
         .get<Asset[]>(this.apiURL + '/EmployeeAssets/' + id)
         .pipe(retry(1), catchError(this.handleError));
+    }
+
+    getAllAssetTypes():Observable<AssetType[]>{
+      return this.http
+      .get<AssetType[]>(this.apiURL + '/AssetType')
+      .pipe(retry(1), catchError(this.handleError));
+    }
+
+    getAllEmployees():Observable<Employee[]>{
+      return this.http
+      .get<Employee[]>(this.apiURL + '/Employee')
+      .pipe(retry(1), catchError(this.handleError));
     }
 
     handleError(error: any) {

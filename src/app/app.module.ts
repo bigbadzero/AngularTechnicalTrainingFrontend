@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import {FormsModule} from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,14 +20,19 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatDialogModule} from '@angular/material/dialog'
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatRadioModule} from '@angular/material/radio';
+
 
 //angular generated components
 import {HomeComponent} from './home/home.component';
 import { CustomSpinnerComponent } from './components/custom-spinner/custom-spinner.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { EmployeeDetailComponent } from './employee-detail/employee-detail.component';
-import { EmployeeAssetsComponent } from './employee-assets/employee-assets.component';
-import { DialogComponent } from './components/dialog/dialog.component';
+import { EmployeeAssetsComponent, EmployeeAssetsDialog } from './employee-assets/employee-assets.component';
+
 
 
 @NgModule({
@@ -37,7 +43,7 @@ import { DialogComponent } from './components/dialog/dialog.component';
     EmployeeComponent,
     EmployeeDetailComponent,
     EmployeeAssetsComponent,
-    DialogComponent
+    EmployeeAssetsDialog
   ],
   imports: [
     BrowserModule,
@@ -57,7 +63,12 @@ import { DialogComponent } from './components/dialog/dialog.component';
     MatProgressSpinnerModule,
     MatDialogModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    FormsModule,
+    MatDatepickerModule,
+    MatInputModule,
+    MatNativeDateModule,
+    MatRadioModule
   ],
   providers: [],
   bootstrap: [AppComponent]

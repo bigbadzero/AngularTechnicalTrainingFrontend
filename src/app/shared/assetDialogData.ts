@@ -1,7 +1,10 @@
-import {AssetDialogOptions} from './assetDialogOptions';
-import {AssetFormFieldData} from './assetFormFieldData';
+
+import {Asset} from '../shared/asset';
+import {AssetType} from '../shared/assetType';
+import {Employee} from '../shared/employee';
 
 export interface AssetDialogData{
-    assetFormFieldData: AssetFormFieldData[];
-    title:string;
+    asset:Asset;
+    assetTypes?: AssetType[];
+    employees?: Employee[];
 }
