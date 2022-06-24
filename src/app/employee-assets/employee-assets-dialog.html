@@ -2,14 +2,17 @@
   <h1 mat-dialog-title>Edit Asset {{data.asset.tagId}}</h1>
   <div mat-dialog-content>
     <mat-form-field appearance="fill">
-      <mat-label>Asset ID</mat-label>
+      <mat-label>Tag ID</mat-label>
       <input
         matInput
         [(ngModel)]="data.asset.tagId"
         name="data.asset.tagId"
         name="tagId"
+        required
+        readonly
       />
     </mat-form-field>
+
     <mat-form-field appearance="fill">
       <mat-label>Asset Type</mat-label>
       <mat-select [(ngModel)]="data.asset.assetType.id" name="assetTypeId">
@@ -21,10 +24,12 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
+
     <mat-form-field appearance="fill">
       <mat-label>Description</mat-label>
-      <input matInput [(ngModel)]="data.asset.description" name="description" />
+      <textarea matInput [(ngModel)]="data.asset.description" name="description" required></textarea> 
     </mat-form-field>
+
     <mat-form-field appearance="fill">
       <mat-label>Employee</mat-label>
       <mat-select [(ngModel)]="data.asset.employee.id" name="employeeId">
@@ -36,30 +41,35 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-form-field appearance="fill">
+
+    <mat-form-field style="width:13rem;" appearance="fill">
       <mat-label>Date Added</mat-label>
       <input
         matInput
         [matDatepicker]="picker"
         [(ngModel)]="data.asset.dateAdded"
         name="dateAdded"
+        required
       />
       <mat-hint>MM/DD/YYYY</mat-hint>
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
+
     <div>
       <mat-checkbox ngModel name="retired" [checked]="data.asset.retired"
         >retired</mat-checkbox
       >
     </div>
-    <mat-form-field appearance="fill" *ngIf="data.asset.retired">
+
+    <mat-form-field  appearance="fill" *ngIf="data.asset.retired">
       <mat-label>Date Retired</mat-label>
       <input matInput [(ngModel)]="data.asset.dateRetired" name="dateRetired" />
     </mat-form-field>
+
     <div mat-dialog-actions>
-      <button mat-button>Submit</button>
-      <button mat-button>Cancel</button>
+      <button mat-raised-button color="primary" [disabled]="!editAssetForm.dirty || !editAssetForm.valid" >Submit</button>
+      <button type="button" mat-raised-button color="warn" (click)="onNoClick()">Cancel</button>
     </div>
   </div>
 </form>

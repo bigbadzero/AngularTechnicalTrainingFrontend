@@ -106,7 +106,7 @@ export class EmployeeAssetsComponent implements OnInit {
     console.log(dataAsset);
     const asset: Asset = {
       tagId: dataAsset.tagID,
-      assetId: dataAsset.assetId,
+      assetTypeId: dataAsset.assetTypeId,
       assetType: dataAsset.assetType,
       description: dataAsset.description,
       employeeId: dataAsset.employeeId,
@@ -141,17 +141,42 @@ export class EmployeeAssetsDialog {
    */
   constructor(
     public dialogRef: MatDialogRef<EmployeeAssetsComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: AssetDialogData
+    @Inject(MAT_DIALOG_DATA) public data: AssetDialogData,
+    public employeeAssetsService: EmployeeAssetsService
   ) {
     console.log(this.data);
   }
 
   onInit() {
-    console.log(this.data);
   }
 
   onSubmit(form: NgForm) {
     console.log(form);
+    let retired:boolean;
+    if(form.value.retired === true) {
+      retired === true;
+    }
+    else{
+      retired === false;
+    }
+    console.log(form.value);
+    const asset: Asset ={
+      tagId: form.value.tagId,
+      assetTypeId: form.value.assetTypeId,
+      description: form.value.description,
+      employeeId: form.value.employeeId,
+      dateAdded: form.value.dateAdded,
+      retired: retired,
+      dateRetired: form.value.dateRetired,
+    }
+    this.employeeAssetsService.updateAsset(asset).subscribe((result) =>{
+      this.dialogRef.close();
+    }, err =>{
+      console.log(err);
+    }, () =>{
+      console.log("record updated");
+      window.location.reload();
+    })
   }
 
   onNoClick(): void {
