@@ -18,7 +18,7 @@
             <textarea matInput ngModel name="description" required></textarea> 
           </mat-form-field>
     
-          <mat-form-field *ngIf="data.asset.employee === null" appearance="fill">
+          <mat-form-field *ngIf="data.asset.employee !== undefined" appearance="fill">
             <mat-label>Employee</mat-label>
             <mat-select  [(ngModel)]="data.asset.employee.id" name="employeeId" [disabled]="data.lockEmployee" required>
               <mat-option
@@ -30,7 +30,7 @@
             </mat-select>
           </mat-form-field>
 
-          <mat-form-field *ngIf="data.asset.employee !== null" appearance="fill">
+          <mat-form-field *ngIf="data.asset.employee === undefined" appearance="fill">
             <mat-label>Employee</mat-label>
             <mat-select  ngModel name="employeeId" [disabled]="data.lockEmployee" required>
               <mat-option
