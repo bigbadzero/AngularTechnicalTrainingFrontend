@@ -6,10 +6,11 @@ import { EmployeeService } from '../shared/services/employeeService';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
-import { Asset } from '../shared/asset';
-import { AssetType } from '../shared/assetType';
-import { Employee } from '../shared/employee';
+import { Asset } from '../shared/models/asset';
+import { AssetType } from '../shared/models/assetType';
+import { Employee } from '../shared/models/employee';
 import { AssetEditDialogComponent } from '../components/dialogs/asset-edit-dialog/asset-edit-dialog.component';
+import {AssetAddDialogComponent} from '../components/dialogs/asset-add-dialog/asset-add-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -24,6 +25,7 @@ export class EmployeeAssetsComponent implements OnInit {
   sub;
   dataSource: any;
   loading: boolean = true;
+  employee: Employee;
   employeeName: string;
   columnsToDisplay = [
     'tagID',
@@ -90,7 +92,8 @@ export class EmployeeAssetsComponent implements OnInit {
         this.dataSource = new MatTableDataSource(result);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-        this.employeeName = result[0].employee.name;
+        this.employee = result[0].employee;
+        this.employeeName = this.employee.name;
       },
       (error) => {
         alert(error.message);
@@ -129,4 +132,23 @@ export class EmployeeAssetsComponent implements OnInit {
       console.log('The dialog was closed');
     });
   }
+  add():void{
+    const asset: Asset = {
+      employeeId: this.employee.id,
+      employee : this.employee
+    }
+    const dialogRef = this.dialog.open(AssetAddDialogComponent, {
+      width: '300px',
+      data:{
+        asset:asset,
+        assetTypes: this.assetTypes,
+        employees: this.employees
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+    });
+  }
+
 }

@@ -2,13 +2,13 @@ import {AssetType} from './assetType';
 import {Employee} from './employee';
 
 export interface Asset {
-    tagId: number;
-    assetTypeId: number;
+    tagId?: number;
+    assetTypeId?: number;
     assetType?: AssetType;
-    description: string;
+    description?: string;
     employeeId?: number;
     employee?: Employee;
-    dateAdded: Date;
-    retired: boolean;
+    dateAdded?: Date;
+    retired?: boolean;
     dateRetired?: Date;
 }

@@ -1,0 +1,31 @@
+<h1 mat-dialog-title>Add Asset</h1>
+<div mat-dialog-content>
+    <mat-form-field appearance="fill">
+        <mat-label>Asset Type</mat-label>
+        <mat-select ngModel name="assetTypeId">
+          <mat-option
+            *ngFor="let assetType of data.assetTypes"
+            [value]="assetType.id"
+          >
+            {{assetType.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Description</mat-label>
+        <textarea matInput ngModel name="description" required></textarea> 
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Employee</mat-label>
+        <mat-select [(ngModel)]="data.asset.employee.id" name="employeeId" disabled>
+          <mat-option
+            *ngFor="let employee of data.employees"
+            [value]="employee.id"
+          >
+            {{employee.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+</div>

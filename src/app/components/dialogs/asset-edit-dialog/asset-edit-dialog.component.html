@@ -32,7 +32,7 @@
   
       <mat-form-field appearance="fill">
         <mat-label>Employee</mat-label>
-        <mat-select [(ngModel)]="data.asset.employee.id" name="employeeId">
+        <mat-select [(ngModel)]="data.asset.employee.id" name="employeeId" >
           <mat-option
             *ngFor="let employee of data.employees"
             [value]="employee.id"

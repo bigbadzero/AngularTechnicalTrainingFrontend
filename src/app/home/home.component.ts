@@ -2,7 +2,7 @@ import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
-import {Asset} from '../shared/asset';
+import {Asset} from '../shared/models/asset';
 import {AssetService} from '../shared/services/assetService'
 
 @Component({

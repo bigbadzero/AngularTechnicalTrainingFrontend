@@ -33,6 +33,7 @@ import { CustomSpinnerComponent } from './components/custom-spinner/custom-spinn
 import { EmployeeComponent } from './employee/employee.component';
 import { EmployeeAssetsComponent } from './employee-assets/employee-assets.component';
 import { AssetEditDialogComponent } from './components/dialogs/asset-edit-dialog/asset-edit-dialog.component';
+import { AssetAddDialogComponent } from './components/dialogs/asset-add-dialog/asset-add-dialog.component';
 
 
 
@@ -43,7 +44,8 @@ import { AssetEditDialogComponent } from './components/dialogs/asset-edit-dialog
     CustomSpinnerComponent,
     EmployeeComponent,
     EmployeeAssetsComponent,
-    AssetEditDialogComponent
+    AssetEditDialogComponent,
+    AssetAddDialogComponent
   ],
   imports: [
     BrowserModule,
