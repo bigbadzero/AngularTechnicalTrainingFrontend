@@ -1,5 +1,17 @@
 <app-custom-spinner *ngIf="loading"></app-custom-spinner>
 <div [hidden]="loading" class="mat-elevation-z8">
+  <div style="display: flex">
+    <h1 style="margin-top: 1rem">Assets </h1>
+    <button
+      class="addButton iconButton"
+      mat-fab
+      color="accent"
+      matTooltip="Add Asset"
+      (click)="add()"
+    >
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
   <table mat-table [dataSource]="dataSource" matSort>
 
     <ng-container matColumnDef="tagID">

@@ -10,6 +10,7 @@ import { AssetTypeService } from '../shared/services/assetTypeService';
 import { EmployeeService } from '../shared/services/employeeService';
 import { MatDialog } from '@angular/material/dialog';
 import { AssetEditDialogComponent } from '../components/dialogs/asset-edit-dialog/asset-edit-dialog.component';
+import {AssetAddDialogComponent} from '../components/dialogs/asset-add-dialog/asset-add-dialog.component';
 
 @Component({
   selector: 'app-home',
@@ -43,6 +44,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.loadAssets();
     this.loadAssetTypes();
+    this.loadEmployees();
   }
 
   loadAssets() {
@@ -118,6 +120,25 @@ export class HomeComponent implements OnInit {
         employees:this.employees,
         assetTypes: this.assetTypes,
       },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  add():void{
+    console.log(this.employees)
+    const asset: Asset = {}
+
+    const dialogRef = this.dialog.open(AssetAddDialogComponent, {
+      width: '300px',
+      data:{
+        asset: asset,
+        assetTypes: this.assetTypes,
+        employees: this.employees,
+        lockEmployee: false
+      }
     });
 
     dialogRef.afterClosed().subscribe((result) => {

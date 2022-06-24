@@ -1,21 +1,18 @@
 table {
-    width: 100%;
-  }
-  
-  th{
-      width:10rem;
-  }
-  
-  th.mat-sort-header-sorted {
-    color: black;
-  }
-
-  .addButton{
-     margin-left:78rem;
-     
-}
-.iconButton:hover{
-    transform: scale(1.2);
+  width: 100%;
 }
 
+th {
+  width: 10rem;
+}
 
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+.addButton {
+  margin-left: 78rem;
+}
+.iconButton:hover {
+  transform: scale(1.2);
+}
