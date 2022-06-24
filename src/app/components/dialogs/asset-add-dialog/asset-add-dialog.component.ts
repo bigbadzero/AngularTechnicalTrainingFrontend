@@ -18,9 +18,6 @@ export class AssetAddDialogComponent {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.data);
-    console.log(this.data.asset.employee === undefined);
-    console.log(this.data.asset.employee !== null);
   }
 
   onSubmit(form: NgForm) {
