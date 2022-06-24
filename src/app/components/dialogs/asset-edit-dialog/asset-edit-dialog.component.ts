@@ -19,11 +19,11 @@ export class AssetEditDialogComponent {
   onInit() {}
 
   onSubmit(form: NgForm) {
-    let retired: boolean;
-    if (form.value.retired === true) {
-      retired === true;
+    let retired: boolean ;
+    if (form.value.retired == true) {
+      retired = true;
     } else {
-      retired === false;
+      retired = false;
     }
     console.log(form.value);
     const asset: Asset = {
