@@ -32,8 +32,8 @@ import {HomeComponent} from './home/home.component';
 import { CustomSpinnerComponent } from './components/custom-spinner/custom-spinner.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { EmployeeDetailComponent } from './employee-detail/employee-detail.component';
-import { EmployeeAssetsComponent, EmployeeAssetsDialog } from './employee-assets/employee-assets.component';
-// import { AssetEditDialogComponent } from './components/asset-edit-dialog/asset-edit-dialog.component';
+import { EmployeeAssetsComponent } from './employee-assets/employee-assets.component';
+import { AssetEditDialogComponent } from './components/asset-edit-dialog/asset-edit-dialog.component';
 
 
 
@@ -45,8 +45,7 @@ import { EmployeeAssetsComponent, EmployeeAssetsDialog } from './employee-assets
     EmployeeComponent,
     EmployeeDetailComponent,
     EmployeeAssetsComponent,
-    EmployeeAssetsDialog,
-    // AssetEditDialogComponent
+    AssetEditDialogComponent
   ],
   imports: [
     BrowserModule,
