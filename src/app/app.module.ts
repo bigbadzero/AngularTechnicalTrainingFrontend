@@ -31,9 +31,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {HomeComponent} from './home/home.component';
 import { CustomSpinnerComponent } from './components/custom-spinner/custom-spinner.component';
 import { EmployeeComponent } from './employee/employee.component';
-import { EmployeeDetailComponent } from './employee-detail/employee-detail.component';
 import { EmployeeAssetsComponent } from './employee-assets/employee-assets.component';
-import { AssetEditDialogComponent } from './components/asset-edit-dialog/asset-edit-dialog.component';
+import { AssetEditDialogComponent } from './components/dialogs/asset-edit-dialog/asset-edit-dialog.component';
 
 
 
@@ -43,7 +42,6 @@ import { AssetEditDialogComponent } from './components/asset-edit-dialog/asset-e
     HomeComponent,
     CustomSpinnerComponent,
     EmployeeComponent,
-    EmployeeDetailComponent,
     EmployeeAssetsComponent,
     AssetEditDialogComponent
   ],

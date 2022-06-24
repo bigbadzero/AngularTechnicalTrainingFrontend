@@ -1,8 +1,8 @@
 import { Component, Inject } from '@angular/core';
-import { Asset } from '../../shared/asset';
-import {AssetService} from '../../shared/services/assetService'
+import { Asset } from '../../../shared/asset';
+import {AssetService} from '../../../shared/services/assetService'
 import { NgForm } from '@angular/forms';
-import { AssetDialogData } from '../../shared/assetDialogData';
+import { AssetDialogData } from '../../../shared/assetDialogData';
 import {
   MatDialog,
   MatDialogRef,

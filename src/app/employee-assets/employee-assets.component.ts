@@ -1,22 +1,16 @@
-import { Component, OnInit, OnDestroy, ViewChild, Inject } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {AssetService} from '../shared/services/assetService';
-import {AssetTypeService} from '../shared/services/assetTypeService';
-import {EmployeeService} from '../shared/services/employeeService'
+import { AssetService } from '../shared/services/assetService';
+import { AssetTypeService } from '../shared/services/assetTypeService';
+import { EmployeeService } from '../shared/services/employeeService';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { Asset } from '../shared/asset';
 import { AssetType } from '../shared/assetType';
 import { Employee } from '../shared/employee';
-import { NgForm } from '@angular/forms';
-import {AssetEditDialogComponent} from '../components/asset-edit-dialog/asset-edit-dialog.component'
-import {
-  MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-} from '@angular/material/dialog';
-import { AssetDialogData } from '../shared/assetDialogData';
+import { AssetEditDialogComponent } from '../components/dialogs/asset-edit-dialog/asset-edit-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-employee-assets',
@@ -87,20 +81,21 @@ export class EmployeeAssetsComponent implements OnInit {
   }
 
   loadAssetsByEmployee(employeeId: number) {
-    this.assetService
-      .getAllAssetsAssignedToEmployee(employeeId)
-      .subscribe(
-        (result) => {
+    this.assetService.getAllAssetsAssignedToEmployee(employeeId).subscribe(
+      (result) => {
+        setTimeout(() => {
           this.loading = false;
-          this.dataSource = new MatTableDataSource(result);
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort;
-          this.employeeName = result[0].employee.name;
-        },
-        (error) => {
-          alert(error.message);
-        }
-      ),
+        }, 500);
+
+        this.dataSource = new MatTableDataSource(result);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.employeeName = result[0].employee.name;
+      },
+      (error) => {
+        alert(error.message);
+      }
+    ),
       () => {
         console.log('complete loading assets');
       };
@@ -135,4 +130,3 @@ export class EmployeeAssetsComponent implements OnInit {
     });
   }
 }
-

@@ -26,7 +26,9 @@ export class HomeComponent implements OnInit {
 
   loadAssets(){
     return this.assetService.getAllAssets().subscribe(x =>{
-      this.loading = false;
+      setTimeout(() => {
+        this.loading = false;
+      }, 500);
       this.Assets = x;
       this.dataSource = new MatTableDataSource(x);
       this.dataSource.paginator = this.paginator;
