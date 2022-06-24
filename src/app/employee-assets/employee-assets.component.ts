@@ -6,7 +6,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { Asset } from '../shared/asset';
 import { AssetType } from '../shared/assetType';
-import {Employee} from '../shared/employee';
+import { Employee } from '../shared/employee';
+import { NgForm } from '@angular/forms';
 import {
   MatDialog,
   MatDialogRef,
@@ -51,21 +52,29 @@ export class EmployeeAssetsComponent implements OnInit {
 
     this.loadAssetsByEmployee(this.id);
 
-    this.employeeAssetsService.getAllAssetTypes().subscribe((result) => {
-      this.assetTypes = result;
-    }, err => {
-      console.log(err)
-    }, () => {
-      console.log('complete loading assetTypes');
-    });
+    this.employeeAssetsService.getAllAssetTypes().subscribe(
+      (result) => {
+        this.assetTypes = result;
+      },
+      (err) => {
+        console.log(err);
+      },
+      () => {
+        console.log('complete loading assetTypes');
+      }
+    );
 
-    this.employeeAssetsService.getAllEmployees().subscribe((result) => {
-      this.employees = result;
-    }, err=>{
-      console.log(err)
-    }, () =>{
-      console.log('complete loading employees');
-    })
+    this.employeeAssetsService.getAllEmployees().subscribe(
+      (result) => {
+        this.employees = result;
+      },
+      (err) => {
+        console.log(err);
+      },
+      () => {
+        console.log('complete loading employees');
+      }
+    );
   }
 
   ngOnDestroy(): void {
@@ -107,14 +116,17 @@ export class EmployeeAssetsComponent implements OnInit {
       dateRetired: dataAsset.dateRetired,
     };
 
-    
     const dialogRef = this.dialog.open(EmployeeAssetsDialog, {
-      width: '250px',
-      data: {asset:asset, assetTypes: this.assetTypes, employees: this.employees},
+      width: '300px',
+      data: {
+        asset: asset,
+        assetTypes: this.assetTypes,
+        employees: this.employees,
+      },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed')
+      console.log('The dialog was closed');
     });
   }
 }
@@ -130,13 +142,16 @@ export class EmployeeAssetsDialog {
   constructor(
     public dialogRef: MatDialogRef<EmployeeAssetsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: AssetDialogData
-
   ) {
     console.log(this.data);
   }
 
   onInit() {
     console.log(this.data);
+  }
+
+  onSubmit(form: NgForm) {
+    console.log(form);
   }
 
   onNoClick(): void {
