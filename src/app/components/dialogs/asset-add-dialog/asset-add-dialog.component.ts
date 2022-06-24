@@ -13,10 +13,35 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class AssetAddDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<AssetAddDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: AssetDialogData
+    @Inject(MAT_DIALOG_DATA) public data: AssetDialogData,
+    public assetService: AssetService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.data);
+  }
+
+  onSubmit(form: NgForm) {
+    console.log(form.value);
+    const asset: Asset = {
+      assetTypeId: form.value.assetTypeId,
+      description: form.value.description,
+      employeeId: this.data.asset.employeeId,
+    };
+
+    this.assetService.addAsset(asset).subscribe(
+      (result) => {
+        this.dialogRef.close();
+      },
+      (err) => {
+        console.log(err);
+      },
+      () => {
+        console.log('record added');
+        window.location.reload();
+      }
+    );
+  }
 
   onNoClick(): void {
     this.dialogRef.close();

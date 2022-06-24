@@ -142,7 +142,8 @@ export class EmployeeAssetsComponent implements OnInit {
       data:{
         asset:asset,
         assetTypes: this.assetTypes,
-        employees: this.employees
+        employees: this.employees,
+        lockEmployee: true
       }
     });
 

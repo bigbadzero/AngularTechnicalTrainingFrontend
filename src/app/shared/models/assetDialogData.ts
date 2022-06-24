@@ -7,4 +7,5 @@ export interface AssetDialogData{
     asset?:Asset;
     assetTypes?: AssetType[];
     employees?: Employee[];
+    lockEmployee?:boolean;
 }
