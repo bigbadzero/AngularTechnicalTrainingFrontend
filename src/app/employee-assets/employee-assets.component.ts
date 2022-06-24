@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy, ViewChild, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { EmployeeAssetsService } from './employee-assets.component.service';
+import {AssetService} from '../shared/services/assetService';
+import {AssetTypeService} from '../shared/services/assetTypeService';
+import {EmployeeService} from '../shared/services/employeeService'
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
@@ -39,7 +41,9 @@ export class EmployeeAssetsComponent implements OnInit {
 
   constructor(
     private _Activatedroute: ActivatedRoute,
-    public employeeAssetsService: EmployeeAssetsService,
+    public assetService: AssetService,
+    public assetTypeService: AssetTypeService,
+    public employeeService: EmployeeService,
     public dialog: MatDialog
   ) {}
   @ViewChild(MatSort) sort: MatSort;
@@ -52,7 +56,7 @@ export class EmployeeAssetsComponent implements OnInit {
 
     this.loadAssetsByEmployee(this.id);
 
-    this.employeeAssetsService.getAllAssetTypes().subscribe(
+    this.assetTypeService.getAllAssetTypes().subscribe(
       (result) => {
         this.assetTypes = result;
       },
@@ -64,7 +68,7 @@ export class EmployeeAssetsComponent implements OnInit {
       }
     );
 
-    this.employeeAssetsService.getAllEmployees().subscribe(
+    this.employeeService.getAllEmployees().subscribe(
       (result) => {
         this.employees = result;
       },
@@ -82,7 +86,7 @@ export class EmployeeAssetsComponent implements OnInit {
   }
 
   loadAssetsByEmployee(employeeId: number) {
-    this.employeeAssetsService
+    this.assetService
       .getAllAssetsAssignedToEmployee(employeeId)
       .subscribe(
         (result) => {
@@ -142,16 +146,14 @@ export class EmployeeAssetsDialog {
   constructor(
     public dialogRef: MatDialogRef<EmployeeAssetsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: AssetDialogData,
-    public employeeAssetsService: EmployeeAssetsService
+    public assetService: AssetService
   ) {
-    console.log(this.data);
   }
 
   onInit() {
   }
 
   onSubmit(form: NgForm) {
-    console.log(form);
     let retired:boolean;
     if(form.value.retired === true) {
       retired === true;
@@ -169,7 +171,7 @@ export class EmployeeAssetsDialog {
       retired: retired,
       dateRetired: form.value.dateRetired,
     }
-    this.employeeAssetsService.updateAsset(asset).subscribe((result) =>{
+    this.assetService.updateAsset(asset).subscribe((result) =>{
       this.dialogRef.close();
     }, err =>{
       console.log(err);

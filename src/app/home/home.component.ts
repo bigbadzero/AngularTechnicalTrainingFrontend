@@ -1,9 +1,9 @@
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
-import {HomeService} from './home.component.service'
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {Asset} from '../shared/asset';
+import {AssetService} from '../shared/services/assetService'
 
 @Component({
   selector: 'app-home',
@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   loading: boolean = true;
 
   columnsToDisplay = ['tagID', 'assetType.name', 'description', 'employee.name', 'dateAdded'];
-  constructor(public homeService: HomeService) {}
+  constructor(public assetService: AssetService) {}
    @ViewChild(MatSort) sort: MatSort;
    @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
   }
 
   loadAssets(){
-    return this.homeService.getAllAssets().subscribe(x =>{
+    return this.assetService.getAllAssets().subscribe(x =>{
       this.loading = false;
       this.Assets = x;
       this.dataSource = new MatTableDataSource(x);

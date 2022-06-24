@@ -1,6 +1,6 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core'
-import {Asset} from '../shared/asset';
+import {AssetType} from '../assetType';
 import {Observable, throwError} from 'rxjs';
 import {retry, catchError} from 'rxjs/operators';
 
@@ -8,25 +8,24 @@ import {retry, catchError} from 'rxjs/operators';
     providedIn: 'root',
 })
 
-export class HomeService{
+export class AssetTypeService{
     apiURL = 'https://localhost:7289';
     /**
      *
      */
     constructor(private http: HttpClient) {}
-
+  
     httpOptions = {
-        headers: new HttpHeaders({'Content-Type': 'application/json'})
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
     };
 
-    getAllAssets(): Observable<Asset[]>{
+    getAllAssetTypes(): Observable<AssetType[]> {
         return this.http
-        .get<Asset[]>(this.apiURL + '/Asset')
-        .pipe(retry(1), catchError(this.handleError));
-    }
+          .get<AssetType[]>(this.apiURL + '/AssetType')
+          .pipe(retry(1), catchError(this.handleError));
+      }
 
-
-    handleError(error: any) {
+      handleError(error: any) {
         let errorMessage = '';
         if (error.error instanceof ErrorEvent) {
           // Get client-side error
