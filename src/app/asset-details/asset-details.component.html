@@ -1,2 +1,54 @@
 <app-custom-spinner *ngIf="loading"></app-custom-spinner>
-<p>asset-details works! {{id}}</p>
+<div [hidden]="loading" class="mat-elevation-z8">
+  <div style="display: flex">
+    <h1 style="margin-top: 1rem">Asset {{ id }}</h1>
+  </div>
+  <table mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="tagID">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>TagID</th>
+      <td mat-cell *matCellDef="let element">{{ element.tagID }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="assetType.name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Asset</th>
+      <td mat-cell *matCellDef="let element">{{ element.assetType.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
+      <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="employee.name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Employee</th>
+      <td mat-cell *matCellDef="let element">
+        <a routerLink="/assets/employee/{{ element.employee.id }}">{{
+          element.employee.name
+        }}</a>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="dateAdded">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Date Aded</th>
+      <td mat-cell *matCellDef="let element">{{ element.dateAdded }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
+      <td mat-cell *matCellDef="let element; let i = index">
+        <button
+          (click)="edit(i)"
+          class="iconButton"
+          mat-fab
+          color="primary"
+          matTooltip="Edit Asset"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
+  </table>
+</div>
