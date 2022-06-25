@@ -50,6 +50,12 @@ export class AssetService {
       .pipe(retry(1), catchError(this.handleError));
   }
 
+  getAssetById(id: number): Observable<Asset> {
+    return this.http
+      .get<Asset>(this.apiURL + '/Asset/' + id)
+      .pipe(retry(1), catchError(this.handleError));
+  }
+
   handleError(error: any) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {

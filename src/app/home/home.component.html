@@ -16,7 +16,7 @@
 
     <ng-container matColumnDef="tagID">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>TagID</th>
-      <td mat-cell *matCellDef="let element">{{ element.tagID }}</td>
+      <td mat-cell *matCellDef="let element"><a routerLink="/assetDetails/{{element.tagID}}">{{ element.tagID }}</a> </td>
     </ng-container>
 
     <ng-container matColumnDef="assetType.name">
