@@ -90,6 +90,13 @@ export class EmployeeAssetsComponent implements OnInit {
         }, 500);
 
         this.dataSource = new MatTableDataSource(result);
+        this.dataSource.sortingDataAccessor = (item, property) => {
+          switch(property) {
+            case 'assetType.name': return item.assetType.name;
+            case 'employee.name' : return item.employee.name;
+            default: return item[property];
+          }
+        };
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
         this.employee = result[0].employee;
