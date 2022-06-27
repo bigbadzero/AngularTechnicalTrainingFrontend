@@ -25,7 +25,7 @@ export class AssetAddDialogComponent {
     const asset: Asset = {
       assetTypeId: form.value.assetTypeId,
       description: form.value.description,
-      employeeId: this.data.asset.employeeId,
+      employeeId: form.value.employeeId,
     };
 
     this.assetService.addAsset(asset).subscribe(
