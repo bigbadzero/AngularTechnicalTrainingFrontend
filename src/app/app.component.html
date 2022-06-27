@@ -1,24 +1,30 @@
 <mat-sidenav-container fullscreen #sidenav>
-  <mat-sidenav style="width:18rem;" #sidenav>
+  <mat-sidenav style="width: 18rem" #sidenav>
     <mat-nav-list (click)="sidenav.close()">
-      <a mat-list-item routerLink="">
-        <mat-icon style="margin-right:2rem;">Home</mat-icon>
-        <span style="padding-top: 0.5rem;">Home</span>
+      <a mat-list-item routerLink="/home">
+        <mat-icon style="margin-right: 2rem">home</mat-icon>
+        <span style="padding-top: 0.5rem">Home</span>
+      </a>
+      <a mat-list-item routerLink="/employees">
+        <mat-icon style="margin-right: 2rem">badge</mat-icon>
+        <span style="padding-top: 0.5rem">Employees</span>
       </a>
     </mat-nav-list>
   </mat-sidenav>
 
   <mat-toolbar color="primary">
-    <button  mat-icon-button (click)="sidenav.open()">
-       <mat-icon>menu</mat-icon>
+    <button mat-icon-button (click)="sidenav.open()">
+      <mat-icon>menu</mat-icon>
     </button>
     <h1>JVD's Saltwater Outfitters</h1>
     <span class="menu-spacer"></span>
     <div>
       <a mat-button routerLink="/home">Home</a>
     </div>
+    <div>
+      <a mat-button routerLink="/employees">Employees</a>
+    </div>
   </mat-toolbar>
 
   <router-outlet></router-outlet>
-
 </mat-sidenav-container>
