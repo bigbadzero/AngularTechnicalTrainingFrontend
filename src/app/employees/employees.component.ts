@@ -5,8 +5,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { Employee } from '../shared/models/employee';
 import { EmployeeService } from '../shared/services/employeeService';
 import { MatDialog } from '@angular/material/dialog';
-import {EmployeeEditDialogComponent} from '../components/dialogs/employee-edit-dialog/employee-edit-dialog.component';
-import {EmployeeAddDialogComponent} from '../components/dialogs/employee-add-dialog/employee-add-dialog.component'
+import {EmployeeEditDialogComponent} from '../components/dialogs/Employee/employee-edit-dialog/employee-edit-dialog.component';
+import {EmployeeAddDialogComponent} from '../components/dialogs/Employee/employee-add-dialog/employee-add-dialog.component'
 @Component({
   selector: 'app-employees',
   templateUrl: './employees.component.html',

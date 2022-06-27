@@ -9,8 +9,8 @@ import { AssetService } from '../shared/services/assetService';
 import { AssetTypeService } from '../shared/services/assetTypeService';
 import { EmployeeService } from '../shared/services/employeeService';
 import { MatDialog } from '@angular/material/dialog';
-import { AssetEditDialogComponent } from '../components/dialogs/asset-edit-dialog/asset-edit-dialog.component';
-import { AssetAddDialogComponent } from '../components/dialogs/asset-add-dialog/asset-add-dialog.component';
+import { AssetEditDialogComponent } from '../components/dialogs/Asset/asset-edit-dialog/asset-edit-dialog.component';
+import { AssetAddDialogComponent } from '../components/dialogs/Asset/asset-add-dialog/asset-add-dialog.component';
 
 @Component({
   selector: 'app-home',

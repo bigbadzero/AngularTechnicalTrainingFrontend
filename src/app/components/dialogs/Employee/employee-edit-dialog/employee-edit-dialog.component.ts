@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { Employee } from '../../../shared/models/employee';
-import { EmployeeService } from '../../../shared/services/employeeService';
+import { Employee } from '../../../../shared/models/employee';
+import { EmployeeService } from '../../../../shared/services/employeeService';
 import { NgForm } from '@angular/forms';
-import { EmployeeDialogData } from '../../../shared/models/employeeDialogData';
+import { EmployeeDialogData } from '../../../../shared/models/employeeDialogData';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({

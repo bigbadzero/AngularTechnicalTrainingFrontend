@@ -1,8 +1,8 @@
 import { Component, Inject } from '@angular/core';
-import { Asset } from '../../../shared/models/asset';
-import { AssetService } from '../../../shared/services/assetService';
+import { Asset } from '../../../../shared/models/asset';
+import { AssetService } from '../../../../shared/services/assetService';
 import { NgForm } from '@angular/forms';
-import { AssetDialogData } from '../../../shared/models/assetDialogData';
+import { AssetDialogData } from '../../../../shared/models/assetDialogData';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
@@ -18,14 +18,22 @@ export class AssetAddDialogComponent {
   ) {}
 
   ngOnInit(): void {
+    console.log(this.data);
   }
 
   onSubmit(form: NgForm) {
     console.log(form.value);
+    let employeeId:number;
+    if(this.data.lockEmployee == true){
+      employeeId = this.data.asset.employeeId;
+    }
+    else{
+      employeeId = form.value.employeeId;
+    }
     const asset: Asset = {
       assetTypeId: form.value.assetTypeId,
       description: form.value.description,
-      employeeId: form.value.employeeId,
+      employeeId: employeeId,
     };
 
     this.assetService.addAsset(asset).subscribe(

@@ -30,12 +30,12 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { HomeComponent } from './home/home.component';
 import { CustomSpinnerComponent } from './components/custom-spinner/custom-spinner.component';
 import { EmployeeAssetsComponent } from './employee-assets/employee-assets.component';
-import { AssetEditDialogComponent } from './components/dialogs/asset-edit-dialog/asset-edit-dialog.component';
-import { AssetAddDialogComponent } from './components/dialogs/asset-add-dialog/asset-add-dialog.component';
+import { AssetEditDialogComponent } from './components/dialogs/Asset/asset-edit-dialog/asset-edit-dialog.component';
+import { AssetAddDialogComponent } from './components/dialogs/Asset/asset-add-dialog/asset-add-dialog.component';
 import { AssetDetailsComponent } from './asset-details/asset-details.component';
 import { EmployeesComponent } from './employees/employees.component';
-import { EmployeeAddDialogComponent } from './components/dialogs/employee-add-dialog/employee-add-dialog.component';
-import { EmployeeEditDialogComponent } from './components/dialogs/employee-edit-dialog/employee-edit-dialog.component';
+import { EmployeeAddDialogComponent } from './components/dialogs/Employee/employee-add-dialog/employee-add-dialog.component';
+import { EmployeeEditDialogComponent } from './components/dialogs/Employee/employee-edit-dialog/employee-edit-dialog.component';
 
 @NgModule({
   declarations: [

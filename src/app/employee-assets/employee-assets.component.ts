@@ -9,8 +9,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { Asset } from '../shared/models/asset';
 import { AssetType } from '../shared/models/assetType';
 import { Employee } from '../shared/models/employee';
-import { AssetEditDialogComponent } from '../components/dialogs/asset-edit-dialog/asset-edit-dialog.component';
-import { AssetAddDialogComponent } from '../components/dialogs/asset-add-dialog/asset-add-dialog.component';
+import { AssetEditDialogComponent } from '../components/dialogs/Asset/asset-edit-dialog/asset-edit-dialog.component';
+import { AssetAddDialogComponent } from '../components/dialogs/Asset/asset-add-dialog/asset-add-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -148,7 +148,7 @@ export class EmployeeAssetsComponent implements OnInit {
       console.log('The dialog was closed');
     });
   }
-  
+
   add(): void {
     const asset: Asset = {
       employeeId: this.employee.id,
