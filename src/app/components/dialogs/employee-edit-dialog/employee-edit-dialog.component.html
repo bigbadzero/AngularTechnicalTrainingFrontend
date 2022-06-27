@@ -1,1 +1,37 @@
-<p>employee-edit-dialog works!</p>
+<form (ngSubmit)="onSubmit(editEmployeeForm)" #editEmployeeForm="ngForm">
+  <h1 mat-dialog-title>Edit Employee {{ data.id }}</h1>
+  <div mat-dialog-content>
+    <mat-form-field appearance="fill">
+      <mat-label>ID</mat-label>
+      <input matInput [(ngModel)]="data.id" name="data.id" name="id" required readonly/>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput [(ngModel)]="data.email" name="email" required />
+    </mat-form-field>
+
+    <mat-form-field style="width: 13rem" appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput [(ngModel)]="data.name" name="name" required />
+    </mat-form-field>
+
+    <div mat-dialog-actions>
+      <button
+        mat-raised-button
+        color="primary"
+        [disabled]="!editEmployeeForm.dirty || !editEmployeeForm.valid"
+      >
+        Submit
+      </button>
+      <button
+        type="button"
+        mat-raised-button
+        color="warn"
+        (click)="onNoClick()"
+      >
+        Cancel
+      </button>
+    </div>
+  </div>
+</form>

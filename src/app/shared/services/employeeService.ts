@@ -24,7 +24,15 @@ export class EmployeeService {
       .pipe(retry(1), catchError(this.handleError));
   }
 
-  
+  updateEmployee(employee: Employee): Observable<Employee> {
+    return this.http
+      .put<Employee>(
+        this.apiURL + '/Employee',
+        JSON.stringify(employee),
+        this.httpOptions
+      )
+      .pipe(retry(1), catchError(this.handleError));
+  }
 
   handleError(error: any) {
     let errorMessage = '';
