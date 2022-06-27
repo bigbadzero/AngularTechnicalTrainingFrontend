@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
   assetTypes: AssetType[];
   employees: Employee[];
   dataSource: any;
-  loading: boolean = true;
+  loading: boolean;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   columnsToDisplay = [
@@ -45,6 +45,7 @@ export class HomeComponent implements OnInit {
   )
 
   ngOnInit(): void {
+    this.loading = true;
     this.loadAssets();
     this.loadAssetTypes();
     this.loadEmployees();

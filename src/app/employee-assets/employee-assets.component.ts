@@ -10,7 +10,7 @@ import { Asset } from '../shared/models/asset';
 import { AssetType } from '../shared/models/assetType';
 import { Employee } from '../shared/models/employee';
 import { AssetEditDialogComponent } from '../components/dialogs/asset-edit-dialog/asset-edit-dialog.component';
-import {AssetAddDialogComponent} from '../components/dialogs/asset-add-dialog/asset-add-dialog.component';
+import { AssetAddDialogComponent } from '../components/dialogs/asset-add-dialog/asset-add-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -24,7 +24,7 @@ export class EmployeeAssetsComponent implements OnInit {
   id: number;
   sub;
   dataSource: any;
-  loading: boolean = true;
+  loading: boolean;
   employee: Employee;
   employeeName: string;
   columnsToDisplay = [
@@ -47,35 +47,13 @@ export class EmployeeAssetsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngOnInit(): void {
+    this.loading = true;
     this.sub = this._Activatedroute.params.subscribe((params) => {
       this.id = params['id'];
     });
-
     this.loadAssetsByEmployee(this.id);
-
-    this.assetTypeService.getAllAssetTypes().subscribe(
-      (result) => {
-        this.assetTypes = result;
-      },
-      (err) => {
-        console.log(err);
-      },
-      () => {
-        console.log('complete loading assetTypes');
-      }
-    );
-
-    this.employeeService.getAllEmployees().subscribe(
-      (result) => {
-        this.employees = result;
-      },
-      (err) => {
-        console.log(err);
-      },
-      () => {
-        console.log('complete loading employees');
-      }
-    );
+    this.getAllEmployees();
+    this.getAllAssetTypes();
   }
 
   ngOnDestroy(): void {
@@ -91,10 +69,13 @@ export class EmployeeAssetsComponent implements OnInit {
 
         this.dataSource = new MatTableDataSource(result);
         this.dataSource.sortingDataAccessor = (item, property) => {
-          switch(property) {
-            case 'assetType.name': return item.assetType.name;
-            case 'employee.name' : return item.employee.name;
-            default: return item[property];
+          switch (property) {
+            case 'assetType.name':
+              return item.assetType.name;
+            case 'employee.name':
+              return item.employee.name;
+            default:
+              return item[property];
           }
         };
         this.dataSource.paginator = this.paginator;
@@ -109,6 +90,34 @@ export class EmployeeAssetsComponent implements OnInit {
       () => {
         console.log('complete loading assets');
       };
+  }
+
+  getAllEmployees() {
+    this.employeeService.getAllEmployees().subscribe(
+      (result) => {
+        this.employees = result;
+      },
+      (err) => {
+        console.log(err);
+      },
+      () => {
+        console.log('complete loading employees');
+      }
+    );
+  }
+
+  getAllAssetTypes() {
+    this.assetTypeService.getAllAssetTypes().subscribe(
+      (result) => {
+        this.assetTypes = result;
+      },
+      (err) => {
+        console.log(err);
+      },
+      () => {
+        console.log('complete loading assetTypes');
+      }
+    );
   }
 
   edit(row): void {
@@ -139,24 +148,24 @@ export class EmployeeAssetsComponent implements OnInit {
       console.log('The dialog was closed');
     });
   }
-  add():void{
+  
+  add(): void {
     const asset: Asset = {
       employeeId: this.employee.id,
-      employee : this.employee
-    }
+      employee: this.employee,
+    };
     const dialogRef = this.dialog.open(AssetAddDialogComponent, {
       width: '300px',
-      data:{
-        asset:asset,
+      data: {
+        asset: asset,
         assetTypes: this.assetTypes,
         employees: this.employees,
-        lockEmployee: true
-      }
+        lockEmployee: true,
+      },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');
     });
   }
-
 }
