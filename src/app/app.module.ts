@@ -34,6 +34,7 @@ import { EmployeeAssetsComponent } from './employee-assets/employee-assets.compo
 import { AssetEditDialogComponent } from './components/dialogs/asset-edit-dialog/asset-edit-dialog.component';
 import { AssetAddDialogComponent } from './components/dialogs/asset-add-dialog/asset-add-dialog.component';
 import { AssetDetailsComponent } from './asset-details/asset-details.component';
+import { EmployeesComponent } from './employees/employees.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { AssetDetailsComponent } from './asset-details/asset-details.component';
     AssetEditDialogComponent,
     AssetAddDialogComponent,
     AssetDetailsComponent,
+    EmployeesComponent,
   ],
   imports: [
     BrowserModule,
