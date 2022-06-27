@@ -6,6 +6,7 @@ import { Employee } from '../shared/models/employee';
 import { EmployeeService } from '../shared/services/employeeService';
 import { MatDialog } from '@angular/material/dialog';
 import {EmployeeEditDialogComponent} from '../components/dialogs/employee-edit-dialog/employee-edit-dialog.component';
+import {EmployeeAddDialogComponent} from '../components/dialogs/employee-add-dialog/employee-add-dialog.component'
 @Component({
   selector: 'app-employees',
   templateUrl: './employees.component.html',
@@ -64,4 +65,20 @@ export class EmployeesComponent implements OnInit {
       console.log('The dialog was closed');
     });
   }
+
+  add(): void {
+
+    const dialogRef = this.dialog.open(EmployeeAddDialogComponent, {
+      width: '300px',
+      data: {
+        name: '',
+        description: '',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+    });
+  }
+
 }

@@ -34,6 +34,16 @@ export class EmployeeService {
       .pipe(retry(1), catchError(this.handleError));
   }
 
+  addEmployee(employee: Employee): Observable<Employee> {
+    return this.http
+      .post<Employee>(
+        this.apiURL + '/Employee',
+        JSON.stringify(employee),
+        this.httpOptions
+      )
+      .pipe(retry(1), catchError(this.handleError));
+  }
+
   handleError(error: any) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {

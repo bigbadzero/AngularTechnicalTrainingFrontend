@@ -1,1 +1,35 @@
-<p>employee-add-dialog works!</p>
+<form (ngSubmit)="onSubmit(addEmployeeForm)" #addEmployeeForm="ngForm">
+    <h1 mat-dialog-title>Add New Employee</h1>
+    <div mat-dialog-content>
+  
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput [(ngModel)]="data.email" email name="email" required />
+        <mat-error>Must be a valid email address</mat-error>
+      </mat-form-field>
+  
+      <mat-form-field style="width: 13rem" appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput [(ngModel)]="data.name" name="name" required />
+      </mat-form-field>
+  
+      <div mat-dialog-actions>
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="!addEmployeeForm.dirty || !addEmployeeForm.valid"
+        >
+          Submit
+        </button>
+        <button
+          type="button"
+          mat-raised-button
+          color="warn"
+          (click)="onNoClick()"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </form>
+  
