@@ -1,28 +1,41 @@
 <app-custom-spinner *ngIf="loading"></app-custom-spinner>
 <div [hidden]="loading" class="mat-elevation-z8">
-  <div style="display: flex">
-    <h1 class="title">Assets </h1>
-    <button
-      class="addButton iconButton"
-      mat-fab
-      color="accent"
-      matTooltip="Add Asset"
-      (click)="add()"
-    >
-      <mat-icon>add</mat-icon>
-    </button>
+  <div class="row">
+    <div class="col-10">
+      <h1>Assets</h1>
+    </div>
+    <div class="col-2">
+      <div class="row">
+        <div class="col-6 float-end text-end ms-auto">
+          <button
+            class="addButton iconButton  "
+            mat-fab
+            color="accent"
+            matTooltip="Add Asset"
+            (click)="add()"
+          >
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+        <div class="col-6"></div>
+      </div>
+    </div>
   </div>
   <table mat-table [dataSource]="dataSource" matSort>
-
     <ng-container matColumnDef="tagID">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>TagID</th>
-      <td mat-cell *matCellDef="let element"><a routerLink="/assetDetails/{{element.tagID}}">{{ element.tagID }}</a> </td>
+      <td mat-cell *matCellDef="let element">
+        <a routerLink="/assetDetails/{{ element.tagID }}">{{
+          element.tagID
+        }}</a>
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="assetType.name">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Asset</th>
       <td mat-cell *matCellDef="let element">{{ element.assetType.name }}</td>
-    </ng-container> -->
+    </ng-container>
+    -->
 
     <ng-container matColumnDef="description">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
@@ -31,7 +44,11 @@
 
     <ng-container matColumnDef="employee.name">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Employee</th>
-      <td mat-cell *matCellDef="let element"><a routerLink="/assets/employee/{{element.employee.id}}">{{ element.employee.name }}</a></td>
+      <td mat-cell *matCellDef="let element">
+        <a routerLink="/assets/employee/{{ element.employee.id }}">{{
+          element.employee.name
+        }}</a>
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="dateAdded">
@@ -57,9 +74,6 @@
     <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
     <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
   </table>
-  <mat-paginator
-    [pageSizeOptions]="[5, 10, 20]"
-    showFirstLastButtons
-  >
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
   </mat-paginator>
 </div>
