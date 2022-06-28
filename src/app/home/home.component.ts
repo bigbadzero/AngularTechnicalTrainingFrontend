@@ -11,6 +11,7 @@ import { EmployeeService } from '../shared/services/employeeService';
 import { MatDialog } from '@angular/material/dialog';
 import { AssetEditDialogComponent } from '../components/dialogs/Asset/asset-edit-dialog/asset-edit-dialog.component';
 import { AssetAddDialogComponent } from '../components/dialogs/Asset/asset-add-dialog/asset-add-dialog.component';
+import { NGXLogger } from 'ngx-logger';
 
 @Component({
   selector: 'app-home',
@@ -37,7 +38,8 @@ export class HomeComponent implements OnInit {
     public assetService: AssetService,
     public employeeService: EmployeeService,
     public assetTypeService: AssetTypeService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private logger: NGXLogger
   ) {}
 
   getProperty = (obj, path) => (
@@ -45,6 +47,7 @@ export class HomeComponent implements OnInit {
   )
 
   ngOnInit(): void {
+    this.logger.trace("home component initialized");
     this.loading = true;
     this.loadAssets();
     this.loadAssetTypes();
@@ -52,9 +55,11 @@ export class HomeComponent implements OnInit {
   }
 
   loadAssets() {
+    this.logger.trace("loading assets");
     return (
       this.assetService.getAllAssets().subscribe(
         (x) => {
+          this.logger.trace("loading assets success");
           setTimeout(() => {
             this.loading = false;
           }, 500);
@@ -73,46 +78,49 @@ export class HomeComponent implements OnInit {
           this.dataSource.sort = this.sort;
         },
         (error) => {
-          alert(error.message);
+          this.logger.debug(error.message);
         }
       ),
       () => {
-        console.log('complete loading assets');
+        this.logger.trace('complete loading assets');
       }
     );
   }
 
   loadAssetTypes() {
+    this.logger.trace("loading assetTypes");
     this.assetTypeService.getAllAssetTypes().subscribe(
       (result) => {
+        this.logger.trace("loading assetTypes Success");
         this.assetTypes = result;
       },
       (err) => {
-        console.log(err);
+        this.logger.debug(err.message);
       },
       () => {
-        console.log('complete loading assetTypes');
+        this.logger.trace('complete loading assetTypes');
       }
     );
   }
 
   loadEmployees() {
+    this.logger.trace("loading employees");
     this.employeeService.getAllEmployees().subscribe(
       (result) => {
+        this.logger.trace("loading employees success");
         this.employees = result;
       },
       (err) => {
-        console.log(err);
+        this.logger.debug(err.message);
       },
       () => {
-        console.log('complete loading employees');
+        this.logger.trace('complete loading employees');
       }
     );
   }
 
   edit(row): void {
-    console.log(row);
-    console.log(this.dataSource);
+    this.logger.trace("editing asset from Home Component");
     let dataAsset = this.dataSource._data._value[row];
     const asset: Asset = {
       tagId: dataAsset.tagID,
@@ -126,6 +134,7 @@ export class HomeComponent implements OnInit {
       dateRetired: dataAsset.dateRetired,
     };
 
+    this.logger.trace('opening AssetEditDialogComponent from Home Component');
     const dialogRef = this.dialog.open(AssetEditDialogComponent, {
       width: '300px',
       data: {
@@ -136,14 +145,14 @@ export class HomeComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
+      this.logger.trace('The AssetEditDialogComponent was closed back on Home Component');
     });
   }
 
   add(): void {
-    console.log(this.employees);
+    this.logger.trace('Adding asset from AssetEditDialogComponent');
     const asset: Asset = {};
-
+    this.logger.trace('opening AssetAddDialogComponent from home component');
     const dialogRef = this.dialog.open(AssetAddDialogComponent, {
       width: '300px',
       data: {
@@ -155,7 +164,7 @@ export class HomeComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
+      this.logger.trace('The AssetAddDialogComponent was closed back on Home Component');
     });
   }
 }
