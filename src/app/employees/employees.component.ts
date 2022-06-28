@@ -2,11 +2,12 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
-import { Employee } from '../shared/models/employee';
 import { EmployeeService } from '../shared/services/employeeService';
 import { MatDialog } from '@angular/material/dialog';
 import {EmployeeEditDialogComponent} from '../components/dialogs/Employee/employee-edit-dialog/employee-edit-dialog.component';
 import {EmployeeAddDialogComponent} from '../components/dialogs/Employee/employee-add-dialog/employee-add-dialog.component'
+import { NGXLogger } from 'ngx-logger';
+
 @Component({
   selector: 'app-employees',
   templateUrl: './employees.component.html',
@@ -21,15 +22,18 @@ export class EmployeesComponent implements OnInit {
 
   constructor(
     public employeeService: EmployeeService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private logger: NGXLogger
   ) {}
 
   ngOnInit(): void {
+    this.logger.trace("initializing employees component");
     this.loading = true;
     this.loadEmployees();
   }
 
   loadEmployees(): void {
+    this.logger.trace("loading employees");
     this.employeeService.getAllEmployees().subscribe(
       (result) => {
         setTimeout(() => {
@@ -41,15 +45,16 @@ export class EmployeesComponent implements OnInit {
         this.dataSource.sort = this.sort;
       },
       (err) => {
-        console.log(err);
+        this.logger.error(err);
       },
       () => {
-        console.log('compelted loading employees');
+        this.logger.trace('compelted loading employees');
       }
     );
   }
 
   edit(row): void {
+    this.logger.trace("edditing employee")
     let dataAsset = this.dataSource._data._value[row];
 
     const dialogRef = this.dialog.open(EmployeeEditDialogComponent, {
@@ -62,12 +67,12 @@ export class EmployeesComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
+      this.logger.trace('The EmployeeEditDialogComponent  was closed');
     });
   }
 
   add(): void {
-
+    this.logger.trace("adding new employee")
     const dialogRef = this.dialog.open(EmployeeAddDialogComponent, {
       width: '300px',
       data: {
@@ -77,7 +82,7 @@ export class EmployeesComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
+      this.logger.trace('The EmployeeAddDialogComponent  was closed');
     });
   }
 
