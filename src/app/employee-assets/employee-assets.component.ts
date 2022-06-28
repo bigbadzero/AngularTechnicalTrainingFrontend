@@ -12,6 +12,7 @@ import { Employee } from '../shared/models/employee';
 import { AssetEditDialogComponent } from '../components/dialogs/Asset/asset-edit-dialog/asset-edit-dialog.component';
 import { AssetAddDialogComponent } from '../components/dialogs/Asset/asset-add-dialog/asset-add-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { NGXLogger } from 'ngx-logger';
 
 @Component({
   selector: 'app-employee-assets',
@@ -41,12 +42,14 @@ export class EmployeeAssetsComponent implements OnInit {
     public assetService: AssetService,
     public assetTypeService: AssetTypeService,
     public employeeService: EmployeeService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private logger: NGXLogger
   ) {}
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngOnInit(): void {
+    this.logger.trace('initializing employee-assets component');
     this.loading = true;
     this.sub = this._Activatedroute.params.subscribe((params) => {
       this.id = params['id'];
@@ -61,6 +64,7 @@ export class EmployeeAssetsComponent implements OnInit {
   }
 
   loadAssetsByEmployee(employeeId: number) {
+    this.logger.trace('loading assets by employee')
     this.assetService.getAllAssetsAssignedToEmployee(employeeId).subscribe(
       (result) => {
         setTimeout(() => {
@@ -84,43 +88,46 @@ export class EmployeeAssetsComponent implements OnInit {
         this.employeeName = this.employee.name;
       },
       (error) => {
-        alert(error.message);
+        this.logger.error(error.message);
       }
     ),
       () => {
-        console.log('complete loading assets');
+        this.logger.trace('completed loading assets');
       };
   }
 
   getAllEmployees() {
+    this.logger.trace('loading all employees');
     this.employeeService.getAllEmployees().subscribe(
       (result) => {
         this.employees = result;
       },
       (err) => {
-        console.log(err);
+        this.logger.error(err);
       },
       () => {
-        console.log('complete loading employees');
+        this.logger.trace('completed loading employees');
       }
     );
   }
 
   getAllAssetTypes() {
+    this.logger.trace('loading all asset types')
     this.assetTypeService.getAllAssetTypes().subscribe(
       (result) => {
         this.assetTypes = result;
       },
       (err) => {
-        console.log(err);
+        this.logger.error(err);
       },
       () => {
-        console.log('complete loading assetTypes');
+        this.logger.trace('completed loading assetTypes');
       }
     );
   }
 
   edit(row): void {
+    this.logger.trace('editing asset from employee-assets component')
     let dataAsset = this.dataSource._data._value[row];
     console.log(dataAsset);
     const asset: Asset = {
@@ -135,6 +142,7 @@ export class EmployeeAssetsComponent implements OnInit {
       dateRetired: dataAsset.dateRetired,
     };
 
+    this.logger.trace('opening AssetEditDialogComponent from employee-asset component')
     const dialogRef = this.dialog.open(AssetEditDialogComponent, {
       width: '300px',
       data: {
@@ -145,15 +153,17 @@ export class EmployeeAssetsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
+      this.logger.trace('The AssetEditDialogComponent was closed');
     });
   }
 
   add(): void {
+    this.logger.trace('adding asset from employee-assets component')
     const asset: Asset = {
       employeeId: this.employee.id,
       employee: this.employee,
     };
+    this.logger.trace('opening AssetAddDialogComponent from employee-asset component')
     const dialogRef = this.dialog.open(AssetAddDialogComponent, {
       width: '300px',
       data: {
@@ -165,7 +175,7 @@ export class EmployeeAssetsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
+      this.logger.trace('The AssetAddDialogComponent was closed');
     });
   }
 }
