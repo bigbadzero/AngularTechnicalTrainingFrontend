@@ -50,7 +50,7 @@ export class AssetEditDialogComponent {
         this.logger.error(err);
       },
       () => {
-        this.logger.trace('record updated');
+        this.logger.trace('asset updated');
         window.location.reload();
       }
     );
