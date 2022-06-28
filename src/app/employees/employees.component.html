@@ -1,16 +1,26 @@
 <app-custom-spinner *ngIf="loading"></app-custom-spinner>
 <div [hidden]="loading" class="mat-elevation-z8">
-  <div style="display: flex">
-    <h1 style="margin-top: 1rem">Employees</h1>
-    <button
-      class="addButton iconButton"
-      mat-fab
-      color="accent"
-      matTooltip="Add Asset"
-      (click)="add()"
-    >
-      <mat-icon>add</mat-icon>
-    </button>
+  <div class="row header">
+    <div class="col-8">
+      <h1>Employees</h1>
+    </div>
+    <div class="col-4">
+      <div class="row gx-5">
+        <div class="col-6 float-end text-end ms-auto ">
+          <button
+            class="addButton iconButton"
+            mat-fab
+            color="accent"
+            matTooltip="Add Asset"
+            (click)="add()"
+            
+          >
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+        <div class="col-6"></div>
+      </div>
+    </div>
   </div>
   <table mat-table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="id">
