@@ -37,6 +37,11 @@ import { EmployeesComponent } from './employees/employees.component';
 import { EmployeeAddDialogComponent } from './components/dialogs/Employee/employee-add-dialog/employee-add-dialog.component';
 import { EmployeeEditDialogComponent } from './components/dialogs/Employee/employee-edit-dialog/employee-edit-dialog.component';
 
+import {LoggerModule, NgxLoggerLevel} from 'ngx-logger';
+import { environment } from '../environments/environment';
+
+const environmentConfig: any = environment.logger;
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -75,6 +80,9 @@ import { EmployeeEditDialogComponent } from './components/dialogs/Employee/emplo
     MatNativeDateModule,
     MatRadioModule,
     MatCheckboxModule,
+    LoggerModule.forRoot({
+      level: NgxLoggerLevel[environmentConfig.level],
+    } as any),
   ],
   providers: [],
   bootstrap: [AppComponent],
