@@ -48,7 +48,7 @@ export class AssetAddDialogComponent {
         this.logger.error(err);
       },
       () => {
-        this.logger.trace('record added');
+        this.logger.trace('asset added');
         window.location.reload();
       }
     );
