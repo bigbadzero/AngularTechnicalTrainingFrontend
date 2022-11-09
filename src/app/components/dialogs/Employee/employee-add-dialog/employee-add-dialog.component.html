@@ -4,7 +4,7 @@
   
       <mat-form-field appearance="fill">
         <mat-label>Email</mat-label>
-        <input matInput [(ngModel)]="data.email" email name="email" required />
+        <input matInput [(ngModel)]="data.email" email name="email" required maxlength="100" />
         <mat-error>Must be a valid email address</mat-error>
       </mat-form-field>
   

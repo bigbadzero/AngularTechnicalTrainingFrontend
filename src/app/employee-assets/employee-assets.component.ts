@@ -175,6 +175,7 @@ export class EmployeeAssetsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
+      console.log(result);
       this.logger.trace('The AssetAddDialogComponent was closed');
     });
   }
